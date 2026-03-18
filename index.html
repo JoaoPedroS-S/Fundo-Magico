@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fundo Mágico — Criação</title>
+  
+  <!-- Link da fonte -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  
+  <!-- Reset / Estilos -->
+  <link rel="stylesheet" href="src/css/reset.css">
+  <link rel="stylesheet" href="src/css/estilos.css">
+  <link rel="stylesheet" href="src/css/responsivo.css">
+</head>
+<body>
+  <!-- Fundo (imagens de fundo / gif / baú) -->
+  <div id="bg-container" class="fundo">
+    <img class="bg-inicial ativo" src="src/images/caverna.png" alt="fundo inicial">
+    <img class="bg-gif" src="src/images/video-caverna.gif" alt="transição animada">
+    <img class="bg-final" src="src/images/bau.png" alt="fundo final">
+  </div>
+
+  <header class="header">
+    <h1>Fundo Mágico</h1>
+    <p class="subtitle">Transforme suas ideias em backgrounds incríveis com o poder da IA.Descreva o que você imagina e veja a magia acontecer.</p>
+  </header>
+
+  <main class="container">
+    <section class="card main-card">
+      <h2 class="card-header">Descreva o background que você deseja</h2>
+
+      <form id="form-magic" class="form-group" action="#" method="post">
+        <textarea id="description" placeholder="Ex: um gradiente azul suave que vai do azul claro para o azul escuro" rows="5"></textarea>
+
+        <button id="generate-btn" type="submit" class="btn-magic">
+          <span id="btn-text">Gerar Background Mágico</span>
+        </button>
+      </form>
+    </section>
+
+    <section id="preview-section" class="preview-card" aria-live="polite" style="display:none;"></section>
+
+    <section id="code-output" class="code-grid" aria-hidden="false">
+      <div class="card code-card">
+        <h3 class="code-title">Código HTML</h3>
+        <pre id="html-code" class="code-block"></pre>
+      </div>
+
+      <div class="card code-card">
+        <h3 class="code-title">Código CSS</h3>
+        <pre id="css-code" class="code-block"></pre>
+      </div>
+    </section>
+  </main>
+
+  <!-- Áudios com múltiplas fontes (fallbacks) -->
+  <audio id="som-inicio" preload="auto" aria-hidden="true">
+    <source src="src/Sons/passos.mp3" type="audio/mpeg">
+    <source src="src/Sons/passos.ogg" type="audio/ogg">
+    <!-- se não tocar, navegador ignorará -->
+  </audio>
+
+  <audio id="som-fim" preload="auto" aria-hidden="true">
+    <source src="src/Sons/bau2.mp3" type="audio/mpeg">
+    <source src="src/Sons/bau2.ogg" type="audio/ogg">
+  </audio>
+
+  <script src="src/js/index.js"></script>
+</body>
+    </html>
+
+
+
