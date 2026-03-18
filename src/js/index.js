@@ -1,5 +1,19 @@
+// Objetivo: 
+// Enviar um texto de um formulário para uma API do n8n e exibir o resultado o código html, css e colocar a animação no fundo da tela do site. 
+// Passos: 
+// 1. No JavaScript, pegar o evento de submit do formulário para evitar o recarregamento da página. 
+// 2. Obter o valor digitado pelo usuário no campo de texto. 
+// 3. Exibir um indicador de carregamento enquanto a requisição está sendo processada. 
+// 4. Fazer uma requisição HTTP (POST) para a API do n8n, enviando o texto do formulário no corpo da requisição em formato JSON. 
+// 5. Receber a resposta da API do n8n (esperando um JSON com o código HTML/CSS do background). 
+// 6. Se a resposta for válida, exibir o código HTML/CSS retornado na tela: 
+//a) Mostrar o HTML gerado em uma área de preview. 
+//b) Inserir o CSS retornado dinamicamente na página para aplicar o background. 
+// 7. Remover o indicador de carregamento após o recebimento da resposta. 
+// 🔹 Função que altera o texto do botão enquanto a IA está gerando 
+
 // ==========================================
-// 🎯 FUNDO MÁGICO — VERSÃO CORRIGIDA
+// 🎯 FUNDO MÁGICO — VERSÃO FINAL CORRIGIDA
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -85,12 +99,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const descricao = textarea.value.trim();
     if (!descricao) return;
 
-    // Reset visual
+    /* Reset visual */
     bgInicial?.classList.add("ativo");
     bgGif?.classList.remove("ativo");
     bgFinal?.classList.remove("ativo", "visivel");
 
-    // Som + animação inicial
+    /* Som + animação inicial */
     pararAudio(somBau);
 
     if (somPassos) {
@@ -158,8 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-
-
 
 
 
