@@ -155,29 +155,28 @@ document.addEventListener("DOMContentLoaded", () => {
   pararAudio(somPassos);
 
   /* 🔊 SOM DO BAÚ */
-  if (somBau) {
-    somBau.currentTime = 0;
-    somBau.play().catch(() => {});
+if (somBau) {
+  somBau.currentTime = 0;
+  somBau.play().catch(() => {});
 
-    // 🔥 ESPERA TERMINAR O SOM DO BAÚ
-   somBau.onended = () => {
+  // 🔥 ESPERA TERMINAR O SOM DO BAÚ
+  somBau.onended = () => {
+    renderResultado(data);
+
+    // fade out
+    bgFinal?.classList.remove("visivel");
+
+    setTimeout(() => {
+      bgFinal?.classList.remove("ativo");
+    }, 500);
+
+    setLoading(false);
+  };
+
+} else {
   renderResultado(data);
-
-  // fade out
-  bgFinal?.classList.remove("visivel");
-
-  setTimeout(() => {
-    bgFinal?.classList.remove("ativo");
-  }, 500);
-
   setLoading(false);
-};
-}});
-});
+}
 
 });
-
-
-
-
-
+}); 
