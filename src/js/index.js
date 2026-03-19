@@ -12,8 +12,8 @@
 // 7. Remover o indicador de carregamento após o recebimento da resposta. 
 // 🔹 Função que altera o texto do botão enquanto a IA está gerando 
 
-// ==========================================
-// 🎯 FUNDO MÁGICO
+/// ==========================================
+// 🎯 FUNDO MÁGICO — VERSÃO FINAL OTIMIZADA
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -90,85 +90,90 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ===============================
-     🚀 EVENTO PRINCIPAL (SUBMIT)
+     🚀 EVENTO PRINCIPAL
   =============================== */
 
   form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const descricao = textarea.value.trim();
-    if (!descricao) return;
+  const descricao = textarea.value.trim();
+  if (!descricao) return;
 
-    // Reset visual
-    bgInicial?.classList.add("ativo");
-    bgGif?.classList.remove("ativo");
-    bgFinal?.classList.remove("ativo", "visivel");
+  /* RESET VISUAL */
+  bgInicial?.classList.add("ativo");
+  bgGif?.classList.remove("ativo");
+  bgFinal?.classList.remove("ativo", "visivel");
 
-    // Som + animação inicial
-    pararAudio(somBau);
+  /* 🔊 INICIA SOM DE PASSOS (LOOP) */
+  pararAudio(somBau);
 
-    if (somPassos) {
-      somPassos.currentTime = 0;
-      somPassos.play().catch(() => {});
+  if (somPassos) {
+    somPassos.loop = true; // 🔥 continua até parar manualmente
+    somPassos.currentTime = 0;
+    somPassos.play().catch(() => {});
+  }
+
+  /* 🎬 ANIMAÇÃO INICIAL */
+  bgInicial?.classList.remove("ativo");
+  bgGif?.classList.add("ativo");
+
+  setLoading(true);
+
+  // 🔥 CHAMA API EM PARALELO
+  const fetchPromise = fetch(
+    "https://eusouojoao.app.n8n.cloud/webhook/gerador-Fundo-magico",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ description: descricao })
     }
+  )
+    .then(res => {
+      if (!res.ok) throw new Error("Erro API");
+      return res.json();
+    })
+    .catch(() => ({
+      code: "<p>Erro ao gerar o background.</p>",
+      style: ""
+    }));
 
-    bgInicial?.classList.remove("ativo");
-    bgGif?.classList.add("ativo");
+  // 🔥 TEMPO MÍNIMO DA ANIMAÇÃO INICIAL
+  const tempoMinimo = 1500;
 
-    setLoading(true);
+  const [data] = await Promise.all([
+    fetchPromise,
+    new Promise(resolve => setTimeout(resolve, tempoMinimo))
+  ]);
 
-    let data;
+  /* 🎁 MOSTRA BAÚ */
+  bgGif?.classList.remove("ativo");
+  bgFinal?.classList.add("ativo", "visivel");
 
-    try {
-      const res = await fetch(
-        "https://eusouojoao.app.n8n.cloud/webhook/gerador-Fundo-magico",
-        {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ description: descricao })
-        });
+  /* ⛔ PARA PASSOS */
+  pararAudio(somPassos);
 
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
+  /* 🔊 SOM DO BAÚ */
+  if (somBau) {
+    somBau.currentTime = 0;
+    somBau.play().catch(() => {});
 
-      data = await res.json();
+    // 🔥 ESPERA TERMINAR O SOM DO BAÚ
+   somBau.onended = () => {
+  renderResultado(data);
 
-    } catch (err) {
-      console.error("Erro no n8n:", err);
-      data = {
-        code: "<p>Erro ao gerar o background.</p>",
-        style: ""
-      };
-    }
+  // fade out
+  bgFinal?.classList.remove("visivel");
 
-    /* ===============================
-       ⏱️ FINALIZAÇÃO COM ANIMAÇÃO
-    =============================== */
+  setTimeout(() => {
+    bgFinal?.classList.remove("ativo");
+  }, 500);
 
-    setTimeout(() => {
-
-      pararAudio(somPassos);
-
-      bgGif?.classList.remove("ativo");
-      bgFinal?.classList.add("ativo", "visivel");
-
-      if (somBau) {
-        somBau.currentTime = 0;
-        somBau.play().catch(() => {});
-        somBau.onended = () => {
-          renderResultado(data);
-          setLoading(false);
-        };
-      } else {
-        renderResultado(data);
-        setLoading(false);
-      }
-
-    }, 4000);
-  });
+  setLoading(false);
+};
+}});
+});
 
 });
 
