@@ -13,7 +13,7 @@
 // 🔹 Função que altera o texto do botão enquanto a IA está gerando 
 
 // ==========================================
-// 🎯 FUNDO MÁGICO — VERSÃO FINAL CORRIGIDA
+// 🎯 FUNDO MÁGICO
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -99,12 +99,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const descricao = textarea.value.trim();
     if (!descricao) return;
 
-    /* Reset visual */
+    // Reset visual
     bgInicial?.classList.add("ativo");
     bgGif?.classList.remove("ativo");
     bgFinal?.classList.remove("ativo", "visivel");
 
-    /* Som + animação inicial */
+    // Som + animação inicial
     pararAudio(somBau);
 
     if (somPassos) {
@@ -121,15 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const res = await fetch(
-        "https://eusouojoao.app.n8n.cloud/webhook-test/gerador-Fundo-magico",
+        "https://eusouojoao.app.n8n.cloud/webhook/gerador-Fundo-magico",
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({ description: descricao })
-        }
-      );
+        });
 
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}`);
@@ -172,7 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-
 
 
 
