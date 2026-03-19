@@ -82,8 +82,14 @@ body {
 .fundo .ativo { opacity:1; }
 
 /* baú */
-.bg-final { opacity: 0; transition: opacity 2.2s ease; -webkit-transition: opacity 2.2s ease; }
-.bg-final.visivel { opacity: 1; }
+.bg-final {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.bg-final.visivel {
+  opacity: 1;
+}
 
 /* gradiente translúcido (mais simples para compatibilidade) */
 body.mostrar-gradiente::after {
@@ -95,4 +101,3 @@ body.mostrar-gradiente::after {
   background: linear-gradient(135deg, rgba(166,85,247,0.35), rgba(255,128,170,0.35));
   opacity: 1;
 }
-
