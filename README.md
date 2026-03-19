@@ -50,6 +50,6 @@ São tocados sons ao longo do processo, aumentando a imersão, com uma animaçã
 
 ## 🌐 **Acesse o Projeto**
 
-🔗 Clique aqui para acessar o projeto: [https://joaopedros-s.github.io/Fundo-Magico/]
+🔗 Clique aqui para acessar o projeto: [https://joaopedros-s.github.io/Meu-Fundo-Magico/]
 
 
