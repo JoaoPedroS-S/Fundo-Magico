@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const res = await fetch(
-        "https://eusouojoao.app.n8n.cloud/webhook/gerador-Fundo-magico",
+        "https://eusouojoao.app.n8n.cloud/webhook-test/gerador-Fundo-magico",
         {
           method: "POST",
           headers: {
