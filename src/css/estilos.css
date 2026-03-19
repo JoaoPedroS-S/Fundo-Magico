@@ -53,6 +53,7 @@ body {
   cursor: pointer;
   font-size: 17px;
   -webkit-appearance: none;
+  appearance: none;
 }
 .btn-magic:hover { transform: translateY(-2px); -webkit-transform: translateY(-2px); }
 
@@ -79,7 +80,9 @@ body {
   transition: opacity 1.5s ease;
   -webkit-transition: opacity 1.5s ease;
 }
-.fundo .ativo { opacity:1; }
+.fundo .ativo { 
+  opacity:1; 
+}
 
 /* baú */
 .bg-final {
@@ -101,3 +104,4 @@ body.mostrar-gradiente::after {
   background: linear-gradient(135deg, rgba(166,85,247,0.35), rgba(255,128,170,0.35));
   opacity: 1;
 }
+
